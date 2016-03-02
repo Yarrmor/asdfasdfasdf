@@ -40,7 +40,8 @@ public class GameMenu extends ApplicationAdapter implements InputProcessor {
     private Stage stage;
 
     private Table table;
-    private TextButton startButton;
+    private TextButton singlePlayerButton;
+    private TextButton multiPlayerButton;
     private TextButton quitButton;
     
     private final int ButtonHeight = 150;
@@ -79,13 +80,22 @@ public class GameMenu extends ApplicationAdapter implements InputProcessor {
         table.align(Align.center | Align.top);
 
         table.setPosition(0, Gdx.graphics.getHeight());
-        startButton = new TextButton("New Game", skin);
-        quitButton = new TextButton("Quit Game", skin);
+        
+        singlePlayerButton = new TextButton("Single Player", skin);
+        multiPlayerButton = new TextButton("Multi Player", skin);
+        quitButton = new TextButton("Quit", skin);
 
-        startButton.addListener(new ClickListener() {
+        singlePlayerButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.log("Clicked button", "Start");
+                Gdx.app.log("Clicked button", "Single Player");
+                event.stop();
+            }
+        });
+        multiPlayerButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.log("Clicked button", "Multi Player");
                 event.stop();
             }
         });
@@ -99,8 +109,9 @@ public class GameMenu extends ApplicationAdapter implements InputProcessor {
         
         table.padTop(30);
 
-        table.add(startButton).padBottom(30);
-
+        table.add(singlePlayerButton).padBottom(30);
+        table.row();
+        table.add(multiPlayerButton).padBottom(30);
         table.row();
         table.add(quitButton);
 
